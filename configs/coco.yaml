@@ -1,4 +1,3 @@
-path: ../datasets/coco  
 train: ../datasets/coco/train2017.txt  
 val: ../datasets/coco/val2017.txt  
 test: ../datasets/coco/test-dev2017.txt  
