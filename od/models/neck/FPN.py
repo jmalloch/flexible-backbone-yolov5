@@ -29,7 +29,7 @@ class PyramidFeatures(nn.Module):
                  'l': {'gd': 1, 'gw': 1},
                  'x': {'gd': 1.33, 'gw': 1.25}}
 
-        if self.version.lower() in gains:
+        if str(self.version).lower() in gains:
             # only for yolov5
             self.gd = gains[self.version.lower()]['gd']  # depth gain
             self.gw = gains[self.version.lower()]['gw']  # width gain
