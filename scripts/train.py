@@ -512,6 +512,7 @@ if __name__ == '__main__':
         hyp = yaml.load(f, Loader=yaml.SafeLoader)  # load hyps
 
     # Train
+    """
     logger.info(opt)
     try:
         import wandb
@@ -519,12 +520,14 @@ if __name__ == '__main__':
         wandb = None
         prefix = colorstr('wandb: ')
         logger.info(f"{prefix}Install Weights & Biases for YOLOv5 logging with 'pip install wandb' (recommended)")
+    """
     if not opt.evolve:
         tb_writer = None  # init loggers
         if opt.global_rank in [-1, 0]:
             logger.info(f'Start Tensorboard with "tensorboard --logdir {opt.project}", view at http://localhost:6006/')
             tb_writer = SummaryWriter(opt.save_dir)  # Tensorboard
-        train(hyp, opt, device, tb_writer, wandb)
+        train(hyp, opt, device, tb_writer)#, wandb)
+        #train(hyp, opt, device, tb_writer, wandb)
 
     # Evolve hyperparameters (optional)
     else:
@@ -598,7 +601,8 @@ if __name__ == '__main__':
                 hyp[k] = round(hyp[k], 5)  # significant digits
 
             # Train mutation
-            results = train(hyp.copy(), opt, device, wandb=wandb)
+            results = train(hyp.copy(), opt, device)#, wandb=wandb)
+            #results = train(hyp.copy(), opt, device, wandb=wandb)
 
             # Write mutation results
             print_mutation(hyp.copy(), results, yaml_file, opt.bucket)
