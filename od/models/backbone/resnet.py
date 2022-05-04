@@ -267,7 +267,7 @@ def resnet152(pretrained=False, **kwargs):
     return model
 
 
-def resnet(pretrained=False, **kwargs):
+def resnet(pretrained=True, **kwargs):
     version = str(kwargs.pop('version'))
     if version == '18':
         return resnet18(pretrained, **kwargs)
