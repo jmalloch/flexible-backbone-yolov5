@@ -23,7 +23,12 @@ class Model(nn.Module):
         model_config = Dict(model_config)
         backbone_type = model_config.backbone.pop('type')
         self.backbone = build_backbone(backbone_type, **model_config.backbone)
-        backbone_out = self.backbone.out_shape
+        if backbone_type=='vit':
+            backbone_out = {'C3_size': 3072,
+                          'C4_size': 768,
+                          'C5_size': 1000}
+        else:
+            backbone_out = self.backbone.out_shape
         backbone_out['version'] = model_config.backbone.version
         self.fpn = build_neck('FPN', **backbone_out)
         fpn_out = self.fpn.out_shape
