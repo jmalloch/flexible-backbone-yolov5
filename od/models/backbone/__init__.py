@@ -4,7 +4,6 @@ from .yolov5 import YOLOv5
 from .swin_transformer import swin_transformer as swin
 from .vit import vit 
 from .vgg import vgg
-from .repvgg import repvgg
 
 __all__ = ['build_backbone']
 
