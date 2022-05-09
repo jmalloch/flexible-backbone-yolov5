@@ -120,12 +120,17 @@ class Detector(object):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--weights', type=str, default='', help='path to weights used for detection')
+    parser.add_argument('--imgdir', type=str, default='', help='path to images to be used for detection')
+    parser.add_argument('--savedir', type=str, default='', help='path to saved predictions')
+    opt = parser.parse_args()
 
-    pt_path = ''
+    pt_path = opt.weights
     model = Detector(pt_path, 640, xcycwh=False)
-    imgs_root = ''
+    imgs_root = opt.imgdir
     imgs = os.listdir(imgs_root)
-    save_dir = ''
+    save_dir = opt.savedir
     if not os.path.exists(save_dir):
         os.mkdir(save_dir)
     for img in imgs:
